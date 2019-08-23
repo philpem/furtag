@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from flask_login import current_user, login_required
+from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from ..app import app
 from ..database import Tag
 
@@ -9,10 +10,10 @@ blueprint = Blueprint(__name__, __name__,
 # go to tag url
 @blueprint.route('/go/<int:tag_id>')
 def go(tag_id):
-	tagrec = Tag.query.filter(Tag.tag_id == tag_id).one()
-	if tagrec is not None:
+	try:
+		tagrec = Tag.query.filter(Tag.tag_id == tag_id).one()
 		return redirect(tagrec.tag_url)
-	else:
+	except (NoResultFound, MultipleResultsFound):
 		return render_template('tag_not_found.html'), 404
 
 # vim: ts=4 sw=4 noet

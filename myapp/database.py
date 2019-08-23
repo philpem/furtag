@@ -15,7 +15,7 @@ class Tag(db.Model):
 	__tablename__ = 'ft_tag'
 	tag_id			= Column(Integer, Sequence('link_id_seq'), primary_key=True)
 	tag_url			= Column(String(200))
-	owner_id		= relationship("User", backref='links')
+	owner_id		= Column(Integer, ForeignKey('user.id'))
 
 # User
 class User(db.Model):
@@ -23,6 +23,8 @@ class User(db.Model):
 	id				= Column(Integer, Sequence('user_id_seq'), primary_key=True)
 	username		= Column(String(50), nullable=False, unique=True)
 	password_hash	= Column(String(60), nullable=False)
+
+	links			= relationship("Tag", backref=backref('user', lazy='joined'))
 
 	def is_authenticated(self):
 		return True
