@@ -1,0 +1,21 @@
+# Debugging toggle - DO NOT enable this on production systems!
+DEBUG = False
+
+# Debugging -- database profiling. Creates a log file in /static/db_profile_report.html.
+DEBUG_DB_PROFILING = False
+
+# Debugging -- SQLAlchemy debug info
+DEBUG_DB_LOG = False
+
+# Cookie encryption key - this needs to be set uniquely for each installation
+SECRET_KEY = "0123456789ABCDEF"
+
+# Database connection string
+# Example for MySQL
+#SQLALCHEMY_DATABASE_URI = "mysql://regsys_user:regsys_password@database_server/regsys_database"
+# Example for PostgreSQL
+#SQLALCHEMY_DATABASE_URI = "postgresql://regsys_user:regsys_password@database_server/regsys_database"
+# Example for SQLite
+#SQLALCHEMY_DATABASE_URI = "sqlite:////srv/regsys/database.sqlite"
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False

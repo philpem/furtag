@@ -1,0 +1,29 @@
+# Flask and dependencies
+Flask
+simplejson
+python-dotenv
+watchdog
+
+# SQLAlchemy
+SQLAlchemy
+
+# Flask extensions
+Flask-WTF
+Flask-Login
+Flask-SQLAlchemy
+Flask-Migrate
+
+# Python bcrypt password hashing -- easier to get this working than py-bcrypt
+bcrypt
+
+# Python >= 2.5 includes SQLite support by default (sqlite3 module)
+# You may want to uncomment one of the lines below to install MySQL or
+# PostgreSQL support.
+# If you're running on Windows, go hunt down a prebuilt binary installer
+# for whichever DB client library you want to use... or just use SQLite.
+
+# PostgreSQL
+# psycopg2==2.5.1
+
+# MySQL
+# MySQL-python=1.2.4

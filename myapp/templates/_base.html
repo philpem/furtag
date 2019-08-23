@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>{% block page_title %}{% endblock %} :: Registration Panel</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" />
+
+		<!-- Custom styles for this template -->
+		<link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<!-- Fixed navbar -->
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+{% if current_user.is_authenticated %}
+					<a class="navbar-brand" href="{{ url_for('archivist.blueprints.index.index') }}">Dashboard (logged in)</a>
+{% else %}
+					<span class="navbar-brand">Dashboard (logged out)</span>
+{% endif %}
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+{% if current_user.is_authenticated %}{% with menuitems = menu %}{%- for menuitem in menuitems %}
+						<li{% if menuitem.endpoint == request.endpoint %} class="active"{% endif %}><a href="{{ url_for(menuitem.endpoint) }}">{{ menuitem.label }}</a></li>{%- endfor %}
+{% endwith %}{% endif %}
+<!--
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Nav header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul>
+						</li>
+-->
+					</ul>
+
+{% if current_user.is_authenticated %}
+					<ul class="nav navbar-nav navbar-right">
+						<!-- TODO - dropdown: User CP, sep, Log Out -->
+						<li><a href="#FIXMEusercp" title="User settings">{{ current_user.username }} <b class="glyphicon glyphicon-user"></b></a></li>
+						<li><a href="{{ url_for('logout') }}" title="Log out"><b class="glyphicon glyphicon-log-out"></b></a></li>
+					</ul>
+{% else %}
+					<p class="nav navbar-text navbar-right">Not logged in</p>
+{% endif %}
+
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+
+		<div class="container">
+{% with messages = get_flashed_messages(with_categories=true) %}
+	{% for category, message in messages %}
+		{% if category.lower() == 'error' %}
+			<div class="alert alert-danger"><b>Error:</b> {{ message }}</div>
+		{% elif category.lower() == 'warning' %}
+			<div class="alert alert-warning"><b>Warning:</b> {{message}}</div>
+		{% elif category.lower() == 'success' %}
+			<div class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{message}}
+			</div>
+		{% else %}
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Information:</strong> {{message}}
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endwith %}
+
+{% block content %}
+{% endblock %}
+		</div>
+
+		<!-- TODO: Footer: copyright message, version info... -->
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{{ url_for('static', filename='js/jquery-1.10.2.min.js') }}"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<!-- TypeAhead -->
+		<script src="{{ url_for('static', filename='js/typeahead.min.js') }}"></script>
+	</body>
+</html>
+
+{# vim: set noai noet filetype=jinja ts=4 sw=4: #}

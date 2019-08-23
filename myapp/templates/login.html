@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% from "_wtf.html" import render_field %}
+
+{% block page_title %}Log in{% endblock %}
+
+{% block content %}
+	<form class="form-signin" action="{{ url_for('login') }}" method="post">
+		{{ form.hidden_tag() }}
+		<h2 class="form-signin-heading">Please log in</h2>
+
+		{{ render_field(form.username, autofocus=True) }}
+		{{ render_field(form.password) }}
+		{{ render_field(form.submit, class_="btn btn-lg btn-primary btn-block") }}
+	</form>
+
+{% endblock %}
+
+{# vim: set noai noet filetype=jinja ts=4 sw=4: #}

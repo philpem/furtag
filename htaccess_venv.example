@@ -1,0 +1,9 @@
+Options +ExecCGI
+DirectoryIndex myapp_venv.wsgi
+AddHandler cgi-script .cgi
+AddHandler wsgi-script .wsgi
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /myapp/myapp_venv.wsgi/$1 [QSA,PT,L]
+
