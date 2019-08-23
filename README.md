@@ -1,19 +1,15 @@
-# FlaskTemplate
+# Furtag
 
-A simple Flask+SQLAlchemy application template.
+A reimplementation of @GeoCyberwolf's Furtag PHP app.
+
+Original code: https://bitbucket.org/GeoCyberwolf/furtag
 
 To use this:
 
-- Create your initial database model by modifying `myapp/database.py`
-- Initialise flask-migrate: `flask db init`
-- Add the new `migrations` folder to git
-- Create an initial migration: `flask db migrate`
-- Apply the migration to the database: `flask db migrate`
-
-Every time the database models change, repeat the `migrate` and `upgrade` commands.
+- Set up a virtualenv: `python3 -m venv venv; . venv/bin/activate; pip install -r requirements.txt`
+- Set `FLASK_APP`: `export FLASK_APP=myapp.app`
+- Configure the database by editing myapp/myapp.cfg (use myapp.cfg.example as an example)
+- Apply the migration to the database: `flask db upgrade`
 
 For more information on flask-migrate, see https://flask-migrate.readthedocs.io/en/latest/ .
 
-## TODO:
-
-- The Docker bootstrap code isn't ideal (especially database initialisation). Ideally look at Dockerfiles for other web apps and improve this.

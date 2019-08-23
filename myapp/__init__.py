@@ -1,8 +1,6 @@
 import os
 from .app import app
 
-from .blueprints import dashboard
-
 def load_blueprints():
 	""" Load all the blueprints (modules or .py files) in a specified directory and its subdirectories.
 	Returns a list of module objects (as returned by __import__)
